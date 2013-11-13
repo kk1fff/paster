@@ -1,0 +1,14 @@
+{
+  "name": "paster",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "latest",
+    "ejs": "latest",
+    "q": "latest",
+    "mongodb": "latest"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  }
+}

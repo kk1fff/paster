@@ -2,22 +2,16 @@
 
 import sys, http.client, urllib.parse, re
 
-content = ''
 usermail = 'kk1fff@patrickz.net'
 username = 'Patrick Wang'
-host = "paster.patrickz.net"
+host = ("localhost", 5000)
+# host = ("paster.patrickz.net", 80)
 
-while True:
-    s = sys.stdin.readline()
-    if s == '':
-        break
-    content = content + s
-
-conn = http.client.HTTPConnection(host, 80)
+content = sys.stdin.read()
+conn = http.client.HTTPConnection(host[0], host[1])
 body = urllib.parse.urlencode({'content': content,
                                'username': username,
                                'usermail': usermail})
-print("body: " + body)
 headers = {"Content-type": "application/x-www-form-urlencoded",
            "Accept": "text/plain"}
 conn.request('POST', '/api/paste', body, headers)
@@ -28,8 +22,9 @@ conn.close()
 
 # parse returning data
 m = re.search(r'ok: ([A-Za-z0-9]+)', result)
-print("result: " + result);
 if m != None:
-    print("View result: http://{0}/{1}".format(host, m.group(1)))
+    print("View result: http://{0}{1}/{2}".format(host[0],
+                                                  "" if host[1] == 80 else ":" + str(host[1]),
+                                                  m.group(1)))
 else:
     print("Failure");

@@ -11,7 +11,7 @@ BaseConv.prototype = {
 
   _internalTransform: function(num) {
     var s = '';
-    while (num > this._len) {
+    while (num >= this._len) {
       s += this._elements[num % this._len];
       num = Math.floor(num / this._len);
     }

@@ -4,8 +4,8 @@ import sys, http.client, urllib.parse, re
 
 usermail = 'kk1fff@patrickz.net'
 username = 'Patrick Wang'
-host = ("localhost", 5000)
-# host = ("paster.patrickz.net", 80)
+# host = ("localhost", 5000)
+host = ("paster.patrickz.net", 80)
 
 content = sys.stdin.read()
 conn = http.client.HTTPConnection(host[0], host[1])

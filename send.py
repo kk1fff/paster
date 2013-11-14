@@ -9,7 +9,7 @@ host = ("localhost", 5000)
 
 content = sys.stdin.read()
 conn = http.client.HTTPConnection(host[0], host[1])
-body = urllib.parse.urlencode({'content': content,
+body = urllib.parse.urlencode({'content':  content,
                                'username': username,
                                'usermail': usermail})
 headers = {"Content-type": "application/x-www-form-urlencoded",
@@ -27,4 +27,9 @@ if m != None:
                                                   "" if host[1] == 80 else ":" + str(host[1]),
                                                   m.group(1)))
 else:
-    print("Failure");
+    # fail, see if we can parse the error message.
+    m = re.search(r'fail: ([^\n]+)', result)
+    if m != None:
+        print("Failure: " + m.group(1))
+    else:
+        print("Failure");
